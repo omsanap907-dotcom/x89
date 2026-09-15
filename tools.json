@@ -128,5 +128,101 @@
     "tags": ["research", "evidence", "papers", "academic search", "scientific literature"],
     "source_type": "web",
     "risk": "low"
+  },
+  {
+    "name": "Hue Write",
+    "url": "https://huewrite.com/",
+    "description": "AI text humanizer that rewrites AI-assisted drafts into more natural-sounding writing while preserving meaning and tone.",
+    "categories": ["Writing", "AI Writing", "Text Rewriting", "AI Humanizers"],
+    "capabilities": ["AI humanization", "rewriting", "tone adjustment", "natural-language editing"],
+    "inputs": ["AI-assisted text", "draft"],
+    "outputs": ["rewritten text", "humanized draft"],
+    "tags": ["humanizer", "AI writing", "rewriter", "writing"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Undetectable AI",
+    "url": "https://undetectable.ai/",
+    "description": "AI writing toolkit that includes AI detection, text humanization, rewriting, and related content tools.",
+    "categories": ["Writing", "AI Writing", "AI Detection", "Text Rewriting"],
+    "capabilities": ["AI detection", "AI humanization", "rewriting", "paraphrasing"],
+    "inputs": ["text", "document"],
+    "outputs": ["AI detection result", "rewritten text", "humanized text"],
+    "tags": ["AI detector", "humanizer", "rewriter", "writing"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "StealthGPT",
+    "url": "https://www.stealthgpt.ai/",
+    "description": "AI writing platform offering text generation, rewriting, humanization, AI detection, and research-oriented writing workflows.",
+    "categories": ["Writing", "AI Writing", "AI Detection", "Text Rewriting"],
+    "capabilities": ["AI writing", "humanization", "rewriting", "AI detection", "research writing"],
+    "inputs": ["topic", "draft", "AI-generated text"],
+    "outputs": ["generated text", "rewritten text", "detection estimate"],
+    "tags": ["AI writer", "humanizer", "AI detector", "research writing"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Originality.ai",
+    "url": "https://originality.ai/",
+    "description": "Content quality and originality platform with AI detection, plagiarism checking, and related content verification tools.",
+    "categories": ["AI Detection", "Plagiarism", "Content Verification", "Writing"],
+    "capabilities": ["AI detection", "plagiarism checking", "content verification", "originality analysis"],
+    "inputs": ["text", "content"],
+    "outputs": ["AI detection score", "plagiarism results", "originality analysis"],
+    "tags": ["AI detector", "originality", "plagiarism", "content verification"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "QuillBot",
+    "url": "https://quillbot.com/",
+    "description": "Writing suite with paraphrasing, grammar checking, summarization, translation, AI detection, humanization, and document tools.",
+    "categories": ["Writing", "Paraphrasing", "Grammar", "AI Detection", "Documents"],
+    "capabilities": ["paraphrasing", "grammar checking", "summarization", "translation", "AI detection", "humanization"],
+    "inputs": ["text", "document"],
+    "outputs": ["rewritten text", "grammar suggestions", "summaries", "translations", "detection results"],
+    "tags": ["paraphraser", "grammar", "summarizer", "AI detector", "writing"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "NoteGPT",
+    "url": "https://notegpt.com/",
+    "description": "AI note-taking and study tool for recording and transcribing lectures or meetings and generating summaries, flashcards, and study guides.",
+    "categories": ["Education", "Note Taking", "Transcription", "Summarization"],
+    "capabilities": ["transcription", "AI summaries", "flashcards", "quizzes", "study guides"],
+    "inputs": ["audio", "video", "PDF", "webpage", "YouTube video"],
+    "outputs": ["transcript", "summary", "flashcards", "quiz", "study guide"],
+    "tags": ["notes", "study", "transcription", "summarizer", "education"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Walter Writes AI",
+    "url": "https://walterwrites.ai/",
+    "description": "AI authenticity platform that rewrites AI-assisted drafts into natural writing and provides AI-content detection.",
+    "categories": ["Writing", "AI Detection", "Text Rewriting", "Content Verification"],
+    "capabilities": ["AI humanization", "rewriting", "AI detection", "content verification"],
+    "inputs": ["text", "AI-assisted draft"],
+    "outputs": ["rewritten text", "AI likelihood score"],
+    "tags": ["AI humanizer", "AI detector", "rewriter", "authenticity"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Humanizer.org",
+    "url": "https://humanizer.org/",
+    "description": "AI humanizer that refines AI-assisted drafts and other writing for more natural language, readability, flow, and style.",
+    "categories": ["Writing", "AI Writing", "Text Rewriting", "AI Humanizers"],
+    "capabilities": ["AI humanization", "rewriting", "readability improvement", "style refinement"],
+    "inputs": ["AI-assisted text", "draft"],
+    "outputs": ["rewritten text", "refined writing"],
+    "tags": ["humanizer", "AI writing", "rewriter", "readability"],
+    "source_type": "web",
+    "risk": "low"
   }
 ]
