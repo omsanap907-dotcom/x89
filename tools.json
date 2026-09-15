@@ -1,9 +1,132 @@
 [
-  {"name":"OSINT Framework","url":"https://osintframework.com/","description":"Visual directory of open-source intelligence resources organized by research category.","categories":["OSINT Frameworks"],"capabilities":["search","directory","research"],"inputs":["research task"],"outputs":["tool links"],"risk":"low"},
-  {"name":"Maltego","url":"https://www.maltego.com/","description":"Graph-based investigation and link analysis platform for mapping relationships between entities and public data sources.","categories":["Link Analysis","OSINT"],"capabilities":["graph","relationships","investigation"],"inputs":["entities"],"outputs":["relationship graph"],"risk":"medium"},
-  {"name":"SpiderFoot","url":"https://github.com/smicallef/spiderfoot","description":"Automated reconnaissance and OSINT collection framework with many modules for public information gathering.","categories":["Automation","Domains & Infrastructure","OSINT"],"capabilities":["recon","automation","domains","hosts"],"inputs":["domain","IP","hostname"],"outputs":["public findings"],"risk":"medium"},
-  {"name":"theHarvester","url":"https://github.com/laramies/theHarvester","description":"Collects publicly available names, emails, subdomains, hosts and related information from supported sources.","categories":["Email Addresses","Domains & Infrastructure"],"capabilities":["email","subdomains","hosts","search"],"inputs":["domain"],"outputs":["emails","hosts","subdomains"],"risk":"medium"},
-  {"name":"Censys","url":"https://search.censys.io/","description":"Search and analyze publicly observable internet hosts and certificates.","categories":["Search Engines","Domains & Infrastructure"],"capabilities":["hosts","certificates","internet assets"],"inputs":["domain","IP","certificate"],"outputs":["asset information"],"risk":"medium"},
-  {"name":"Google Lens","url":"https://lens.google.com/","description":"Visual search for finding related images and publicly indexed visual information.","categories":["Images / Videos / Docs","Verification"],"capabilities":["image search","visual search","verification"],"inputs":["image"],"outputs":["related results"],"risk":"low"},
-  {"name":"Have I Been Pwned","url":"https://haveibeenpwned.com/","description":"Checks whether an email address appears in known data breaches using a public breach-notification service.","categories":["Email Addresses","Breach Awareness"],"capabilities":["breach check","email"],"inputs":["email"],"outputs":["breach notifications"],"risk":"low"}
+  {
+    "name": "OSINT Framework",
+    "url": "https://osintframework.com/",
+    "description": "Visual directory of open-source intelligence resources organized by research category.",
+    "categories": ["OSINT Frameworks"],
+    "capabilities": ["search", "directory", "research"],
+    "inputs": ["research task"],
+    "outputs": ["tool links"],
+    "risk": "low"
+  },
+  {
+    "name": "Maltego",
+    "url": "https://www.maltego.com/",
+    "description": "Graph-based investigation and link analysis platform for mapping relationships between entities and public data sources.",
+    "categories": ["Link Analysis", "OSINT"],
+    "capabilities": ["graph", "relationships", "investigation"],
+    "inputs": ["entities"],
+    "outputs": ["relationship graph"],
+    "risk": "medium"
+  },
+  {
+    "name": "SpiderFoot",
+    "url": "https://github.com/smicallef/spiderfoot",
+    "description": "Automated reconnaissance and OSINT collection framework with many modules for public information gathering.",
+    "categories": ["Automation", "Domains & Infrastructure", "OSINT"],
+    "capabilities": ["recon", "automation", "domains", "hosts"],
+    "inputs": ["domain", "IP", "hostname"],
+    "outputs": ["public findings"],
+    "risk": "medium"
+  },
+  {
+    "name": "theHarvester",
+    "url": "https://github.com/laramies/theHarvester",
+    "description": "Collects publicly available names, emails, subdomains, hosts and related information from supported sources.",
+    "categories": ["Email Addresses", "Domains & Infrastructure"],
+    "capabilities": ["email", "subdomains", "hosts", "search"],
+    "inputs": ["domain"],
+    "outputs": ["emails", "hosts", "subdomains"],
+    "risk": "medium"
+  },
+  {
+    "name": "Censys",
+    "url": "https://search.censys.io/",
+    "description": "Search and analyze publicly observable internet hosts and certificates.",
+    "categories": ["Search Engines", "Domains & Infrastructure"],
+    "capabilities": ["hosts", "certificates", "internet assets"],
+    "inputs": ["domain", "IP", "certificate"],
+    "outputs": ["asset information"],
+    "risk": "medium"
+  },
+  {
+    "name": "Google Lens",
+    "url": "https://lens.google.com/",
+    "description": "Visual search for finding related images and publicly indexed visual information.",
+    "categories": ["Images / Videos / Docs", "Verification"],
+    "capabilities": ["image search", "visual search", "verification"],
+    "inputs": ["image"],
+    "outputs": ["related results"],
+    "risk": "low"
+  },
+  {
+    "name": "Have I Been Pwned",
+    "url": "https://haveibeenpwned.com/",
+    "description": "Checks whether an email address appears in known data breaches using a public breach-notification service.",
+    "categories": ["Email Addresses", "Breach Awareness"],
+    "capabilities": ["breach check", "email"],
+    "inputs": ["email"],
+    "outputs": ["breach notifications"],
+    "risk": "low"
+  },
+  {
+    "name": "Paperpal",
+    "url": "https://paperpal.com/",
+    "description": "AI-powered academic writing and research assistant for improving research manuscripts, academic language, grammar, editing, and journal submission readiness.",
+    "categories": ["Research", "Academic Writing", "Writing", "Journal Publishing"],
+    "capabilities": ["academic writing", "grammar correction", "language editing", "research paper editing", "manuscript editing", "journal submission"],
+    "inputs": ["research paper", "academic text", "manuscript"],
+    "outputs": ["edited manuscript", "writing suggestions", "submission support"],
+    "tags": ["research paper", "academic", "Q1 journals", "editing", "writing"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Jenni",
+    "url": "https://jenni.ai/",
+    "description": "AI writing assistant designed to help with academic and general writing, drafting, citations, and research workflows.",
+    "categories": ["Research", "Academic Writing", "Writing", "Citations"],
+    "capabilities": ["AI writing", "academic writing", "drafting", "citations", "research writing"],
+    "inputs": ["topic", "draft", "research text"],
+    "outputs": ["draft text", "writing suggestions", "citations"],
+    "tags": ["research", "academic", "writing", "citations", "drafting"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "SciSpace",
+    "url": "https://typeset.io/",
+    "description": "AI research assistant for discovering, reading, understanding, and analyzing scientific papers and research literature.",
+    "categories": ["Research", "Literature Review", "Academic Papers", "PDF Analysis"],
+    "capabilities": ["paper discovery", "paper reading", "literature review", "PDF analysis", "research explanation"],
+    "inputs": ["research question", "research paper", "PDF", "topic"],
+    "outputs": ["paper summaries", "research explanations", "literature insights"],
+    "tags": ["research", "papers", "literature review", "PDF", "academic"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Avidnote",
+    "url": "https://avidnote.com/",
+    "description": "AI research workspace for organizing notes, analyzing documents, and supporting literature review and research workflows.",
+    "categories": ["Research", "Literature Review", "Note Taking", "Knowledge Management"],
+    "capabilities": ["research notes", "document analysis", "literature review", "research organization", "AI notes"],
+    "inputs": ["research notes", "documents", "papers", "research material"],
+    "outputs": ["organized notes", "analysis", "research summaries"],
+    "tags": ["research", "notes", "literature review", "documents", "organization"],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "Consensus",
+    "url": "https://consensus.app/",
+    "description": "AI-powered research search engine for finding evidence and research-backed answers from scientific literature.",
+    "categories": ["Research", "Research Discovery", "Academic Search", "Evidence Search"],
+    "capabilities": ["research search", "evidence discovery", "scientific literature search", "research-backed answers", "paper discovery"],
+    "inputs": ["research question", "topic", "scientific question"],
+    "outputs": ["research evidence", "paper results", "research-backed answers"],
+    "tags": ["research", "evidence", "papers", "academic search", "scientific literature"],
+    "source_type": "web",
+    "risk": "low"
+  }
 ]
