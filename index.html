@@ -3,35 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>OSINT Framework+</title>
+  <meta name="description" content="A public directory that organizes useful tools by what they do and helps you find the right tool for a task.">
+  <title>ToolMap — Find the right tool</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="logo">⌕</span><div><strong>OSINT Framework+</strong><small>Search • Discover • Organize</small></div></div>
+    <div class="brand"><span class="logo">⌕</span><div><strong>ToolMap</strong><small>Discover • Search • Organize</small></div></div>
     <button id="themeBtn" class="ghost">Light Mode</button>
   </header>
   <main>
     <section class="hero">
-      <h1>Find the right OSINT tool for the job.</h1>
-      <p>Add tools once. The framework automatically categorizes them and ranks them against what you are trying to research.</p>
-      <div class="searchbox"><span>⌕</span><input id="search" autocomplete="off" placeholder="What are you trying to find? e.g. check a domain, find an email, verify an image"><button id="clear">×</button></div>
+      <div class="eyebrow">PUBLIC TOOL DIRECTORY</div>
+      <h1>Find the right tool for the job.</h1>
+      <p>Search by what you want to accomplish. Tools are organized from their capabilities, inputs and descriptions instead of relying on a fixed category list.</p>
+      <div class="searchbox"><span>⌕</span><input id="search" autocomplete="off" placeholder="What do you need to do? e.g. edit a video, analyze data, find a PDF"><button id="clear" aria-label="Clear search">×</button></div>
       <div id="chips" class="chips"></div>
     </section>
     <div class="layout">
       <aside class="sidebar"><div class="side-title">Categories</div><div id="categories"></div></aside>
       <section class="content">
-        <div class="results-head"><div><span id="resultCount">0</span> tools</div><button id="addBtn" class="primary">+ Add tool</button></div>
+        <div class="results-head"><div><span id="resultCount">0</span> tools</div><div class="status">Curated directory</div></div>
         <div id="results" class="results"></div>
       </section>
     </div>
   </main>
-  <dialog id="addDialog">
-    <form method="dialog" id="addForm"><h2>Add a tool</h2><p class="muted">Describe what it does. Categories, capabilities and search terms are inferred automatically.</p>
-      <label>Name<input name="name" required></label><label>URL<input name="url" type="url" required></label><label>Description<textarea name="description" required></textarea></label>
-      <div class="dialog-actions"><button value="cancel" class="ghost">Cancel</button><button id="saveTool" value="default" class="primary">Add tool</button></div>
-    </form>
-  </dialog>
   <script src="app.js"></script>
 </body>
 </html>
