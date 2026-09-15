@@ -1,37 +1,109 @@
-let tools=[], selected='All', queryTimer=null;
-const categoryRules={
- 'Username':['username','handle','user name','account name'],
- 'Email Addresses':['email','e-mail','mail address'],
- 'People Search':['person','people','identity','name search','profile'],
- 'Social Networks':['social','instagram','facebook','twitter','linkedin','tiktok'],
- 'Domains & Infrastructure':['domain','subdomain','dns','host','ip address','certificate','infrastructure','whois'],
- 'Images / Videos / Docs':['image','photo','video','document','pdf','visual'],
- 'Verification':['verify','verification','fact check','reverse image','authentic','validate'],
- 'Search Engines':['search engine','search','indexed','public records'],
- 'Business Records':['company','business','corporate','organization'],
- 'Geolocation Tools / Maps':['geolocation','location','map','coordinates','geo'],
- 'Archives':['archive','historical','wayback','cached'],
- 'Automation':['automation','automated','recon','crawler','scraper','collect'],
- 'Dark Web':['dark web','onion','tor'],
- 'Breach Awareness':['breach','leaked','compromised'],
- 'Blockchain & Cryptocurrency':['bitcoin','crypto','blockchain','wallet','transaction'],
- 'AI Tools':['ai ','artificial intelligence','machine learning','llm'],
- 'Code / Development':['api','sdk','developer','code','github','programming'],
- 'Metadata / File Analysis':['metadata','exif','file analysis','hash'],
- 'Public Records':['records','registry','government','filing'],
- 'Phone Numbers':['phone','telephone','mobile number','number lookup']
+let tools = [], selected = 'All';
+
+const categoryRules = {
+  'AI & Automation':['ai','artificial intelligence','machine learning','llm','automation','automated','workflow'],
+  'Developer Tools':['code','developer','programming','api','sdk','debug','git','repository','json','database'],
+  'Design & Graphics':['design','graphic','ui','ux','logo','illustration','vector','photo editor'],
+  'Video & Audio':['video','audio','music','podcast','editing','subtitle','transcription','voice'],
+  'Writing & Research':['writing','writer','research','paper','citation','grammar','summarize','literature'],
+  'Productivity':['productivity','notes','calendar','task','project management','document','spreadsheet'],
+  'Data & Analytics':['data','analytics','statistics','visualization','dashboard','csv','excel'],
+  'Marketing & SEO':['marketing','seo','keyword','advertising','social media','content'],
+  'Business & Finance':['business','finance','accounting','invoice','sales','crm','company'],
+  'Security & Privacy':['security','privacy','password','encryption','vulnerability','malware'],
+  'OSINT & Investigation':['osint','investigation','recon','username','email','people search','domain','whois','geolocation'],
+  'Education & Learning':['education','learning','course','study','tutor','flashcard'],
+  'Maps & Geolocation':['map','maps','location','geolocation','coordinates','route'],
+  'Images & Media Search':['image','photo','reverse image','visual search','media'],
+  'Files & Utilities':['file','pdf','converter','compress','download','utility','calculator'],
+  'Web & Internet':['website','web','browser','search engine','internet','url','domain'],
+  'Communication':['email','chat','messaging','video call','communication'],
+  'Other':['tool','directory','platform']
 };
-function inferCategories(t){const text=(t.name+' '+t.description+' '+(t.capabilities||[]).join(' ')+' '+(t.inputs||[]).join(' ')+' '+(t.outputs||[]).join(' ')).toLowerCase();const out=[];for(const [cat,words] of Object.entries(categoryRules))if(words.some(w=>text.includes(w)))out.push(cat);return out.length?out:['Other']}
-function normalize(t){t.categories=[...new Set([...(t.categories||[]),...inferCategories(t)].filter(Boolean))];t.capabilities=[...new Set(t.capabilities||[])];t.inputs=[...new Set(t.inputs||[])];t.outputs=[...new Set(t.outputs||[])];return t}
-async function load(){try{const r=await fetch('tools.json?'+Date.now());if(!r.ok)throw new Error('tools.json failed');tools=(await r.json()).map(normalize)}catch(e){console.error(e);tools=[]}render()}
-function tokenize(q){return q.toLowerCase().replace(/[^a-z0-9@._-]+/g,' ').split(/\s+/).filter(Boolean)}
-function score(t,q){if(!q)return {score:0,matched:[]};const terms=tokenize(q),name=t.name.toLowerCase(),cats=t.categories.join(' ').toLowerCase(),caps=t.capabilities.join(' ').toLowerCase(),inputs=t.inputs.join(' ').toLowerCase(),outputs=t.outputs.join(' ').toLowerCase(),desc=t.description.toLowerCase();let score=0,matched=[];for(const x of terms){let hit=false;if(name.includes(x)){score+=12;hit=true}if(caps.includes(x)){score+=9;hit=true}if(inputs.includes(x)){score+=8;hit=true}if(outputs.includes(x)){score+=6;hit=true}if(cats.includes(x)){score+=5;hit=true}if(desc.includes(x)){score+=3;hit=true}if(hit)matched.push(x)}const phrase=terms.join(' ');if(terms.length>1&&desc.includes(phrase))score+=10;return {score,matched:[...new Set(matched)]}}
-function render(){const q=document.querySelector('#search').value.trim();let arr=tools.filter(t=>selected==='All'||t.categories.includes(selected));if(q)arr=arr.map(t=>({...t,_match:score(t,q)})).filter(t=>t._match.score>0).sort((a,b)=>b._match.score-a._match.score);document.querySelector('#resultCount').textContent=arr.length;document.querySelector('#results').innerHTML=arr.map(t=>`<article class="card"><div class="card-top"><div><h3><a href="${safe(t.url)}" target="_blank" rel="noopener noreferrer">${safe(t.name)}</a></h3><div class="desc">${safe(t.description)}</div></div><span class="risk">${safe(t.risk||'unknown')} scope</span></div><div class="meta">${t.categories.map(x=>`<span class="tag">${safe(x)}</span>`).join('')}${t.capabilities.slice(0,5).map(x=>`<span class="tag">${safe(x)}</span>`).join('')}</div>${q?`<div class="why">Matched: ${t._match.matched.slice(0,5).map(safe).join(', ')} · Score ${t._match.score}</div>`:''}</article>`).join('')||'<div class="card"><strong>No matching tools.</strong><div class="desc">Describe the task rather than the tool name: “find an email”, “investigate a domain”, or “verify an image”.</div></div>';renderCategories()}
-function renderCategories(){const counts={};tools.forEach(t=>t.categories.forEach(c=>counts[c]=(counts[c]||0)+1));const cats=['All',...Object.keys(counts).sort()];document.querySelector('#categories').innerHTML=cats.map(c=>`<button class="cat ${selected===c?'active':''}" data-cat="${safe(c)}">${safe(c)} <span>${c==='All'?tools.length:counts[c]}</span></button>`).join('');document.querySelectorAll('.cat').forEach(b=>b.onclick=()=>{selected=b.dataset.cat;render()})}
-function safe(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-document.querySelector('#search').oninput=()=>{clearTimeout(queryTimer);queryTimer=setTimeout(render,80)};
-document.querySelector('#clear').onclick=()=>{document.querySelector('#search').value='';render()};
-document.querySelector('#themeBtn').onclick=()=>document.body.classList.toggle('light');
-document.querySelector('#addBtn').onclick=()=>document.querySelector('#addDialog').showModal();
-document.querySelector('#addForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);const t=normalize({name:f.get('name'),url:f.get('url'),description:f.get('description'),categories:[],capabilities:[],inputs:[],outputs:[],risk:'unknown'});tools.unshift(t);e.target.reset();document.querySelector('#addDialog').close();render();alert('Tool added for this browser session. Permanent storage will require the backend tool-registry API.')};
+
+const stop = new Set(['the','a','an','for','to','of','and','or','with','my','this','that','i','need','want','find','get','make','use','on','in','it','is']);
+
+function textOf(t){
+  return [t.name,t.description,...(t.categories||[]),...(t.capabilities||[]),...(t.inputs||[]),...(t.outputs||[]),...(t.tags||[])].join(' ').toLowerCase();
+}
+
+function inferCategories(t){
+  const text = textOf(t);
+  const scored = Object.entries(categoryRules).map(([cat, words]) => {
+    let score = 0;
+    for (const word of words) if (text.includes(word)) score += word.includes(' ') ? 3 : 1;
+    return [cat, score];
+  }).filter(([,score]) => score > 0).sort((a,b) => b[1]-a[1]);
+  return scored.length ? scored.slice(0,4).map(([cat]) => cat) : ['Other'];
+}
+
+function normalize(t){
+  const explicit = Array.isArray(t.categories) ? t.categories : [];
+  t.categories = [...new Set([...explicit, ...inferCategories(t)])];
+  t.capabilities = t.capabilities || [];
+  t.inputs = t.inputs || [];
+  t.outputs = t.outputs || [];
+  t.tags = t.tags || [];
+  return t;
+}
+
+async function load(){
+  try {
+    const response = await fetch('tools.json?' + Date.now(), {cache:'no-store'});
+    if (!response.ok) throw new Error('Tool registry unavailable');
+    tools = (await response.json()).map(normalize);
+  } catch(e) {
+    tools = [];
+    document.querySelector('#results').innerHTML = '<div class="card"><strong>Tool registry unavailable.</strong><div class="desc">Please try again later.</div></div>';
+  }
+  render();
+}
+
+function tokenize(q){
+  return q.toLowerCase().replace(/[^a-z0-9+#.-]+/g,' ').split(/\s+/).filter(x => x && !stop.has(x));
+}
+
+function score(t,q){
+  if(!q) return 0;
+  const terms = tokenize(q), text = textOf(t);
+  let score = 0;
+  for(const term of terms){
+    if(t.name.toLowerCase().includes(term)) score += 12;
+    if((t.categories||[]).join(' ').toLowerCase().includes(term)) score += 8;
+    if((t.capabilities||[]).join(' ').toLowerCase().includes(term)) score += 7;
+    if((t.inputs||[]).join(' ').toLowerCase().includes(term)) score += 5;
+    if((t.outputs||[]).join(' ').toLowerCase().includes(term)) score += 4;
+    if((t.tags||[]).join(' ').toLowerCase().includes(term)) score += 5;
+    if(t.description.toLowerCase().includes(term)) score += 3;
+  }
+  return score;
+}
+
+function render(){
+  const q = document.querySelector('#search').value.trim();
+  let arr = tools.filter(t => selected === 'All' || t.categories.includes(selected));
+  if(q) arr = arr.map(t => ({...t,_score:score(t,q)})).filter(t => t._score > 0).sort((a,b) => b._score-a._score);
+  document.querySelector('#resultCount').textContent = arr.length;
+  document.querySelector('#results').innerHTML = arr.map(t => `
+    <article class="card">
+      <div class="card-top"><div><h3><a href="${safe(t.url)}" target="_blank" rel="noopener noreferrer">${safe(t.name)}</a></h3><div class="desc">${safe(t.description)}</div></div><span class="risk">${safe(t.risk||'unknown')}</span></div>
+      <div class="meta">${t.categories.map(x=>`<span class="tag">${safe(x)}</span>`).join('')}${(t.capabilities||[]).slice(0,4).map(x=>`<span class="tag">${safe(x)}</span>`).join('')}</div>
+      ${q ? `<div class="why">Relevance score: ${t._score}</div>` : ''}
+    </article>`).join('') || '<div class="card"><strong>No matching tools.</strong><div class="desc">Try describing the task differently.</div></div>';
+  renderCategories();
+}
+
+function renderCategories(){
+  const counts = {};
+  tools.forEach(t => t.categories.forEach(c => counts[c]=(counts[c]||0)+1));
+  const cats = ['All', ...Object.keys(counts).sort()];
+  document.querySelector('#categories').innerHTML = cats.map(c => `<button class="cat ${selected===c?'active':''}" data-cat="${safe(c)}">${safe(c)} <span>${c==='All'?tools.length:counts[c]}</span></button>`).join('');
+  document.querySelectorAll('.cat').forEach(b => b.onclick = () => {selected=b.dataset.cat;render();});
+}
+
+function safe(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+
+document.querySelector('#search').oninput = render;
+document.querySelector('#clear').onclick = () => {document.querySelector('#search').value='';render();};
+document.querySelector('#themeBtn').onclick = () => document.body.classList.toggle('light');
 load();
