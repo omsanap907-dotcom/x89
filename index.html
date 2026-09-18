@@ -1,55 +1,34 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="ToolMap — a visual directory for discovering useful tools by category and task.">
-  <title>ToolMap — Tool Discovery</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050912">
+<meta name="description" content="ToolMap — discover useful tools through an interactive visual map.">
+<title>ToolMap — Explore Tools</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="ToolMap home"><span class="logo">⌘</span><span><strong>ToolMap</strong><small>Tool Discovery Engine</small></span></a>
-    <nav><a href="#directory">Directory</a><a href="#about">About</a><button id="themeBtn" class="ghost">☼</button></nav>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="eyebrow">TOOL DIRECTORY</div>
-      <h1>Find the tool you need.</h1>
-      <p>Browse a visual map of tools or search by the task you want to accomplish.</p>
-      <div class="searchbox">
-        <span>⌕</span>
-        <input id="search" autocomplete="off" placeholder="Search a task, category, capability, or tool…">
-        <button id="clear" aria-label="Clear search">×</button>
-      </div>
-      <div id="chips" class="chips"></div>
-    </section>
-
-    <section id="directory" class="directory">
-      <div class="directory-head">
-        <div><span class="eyebrow">DIRECTORY</span><h2>Explore tools</h2></div>
-        <div class="view-note"><span id="resultCount">0</span> tools</div>
-      </div>
-
-      <div class="map-layout">
-        <aside class="sidebar">
-          <div class="side-title">Categories</div>
-          <div id="categories"></div>
-        </aside>
-        <section class="content">
-          <div id="results" class="tree"></div>
-        </section>
-      </div>
-    </section>
-
-    <section id="about" class="about">
-      <h2>About ToolMap</h2>
-      <p>ToolMap organizes tools by what they do. Category assignments are generated from each tool's description, capabilities, inputs, outputs and tags. Public visitors can browse and search; the tool registry is maintained in the backend.</p>
-    </section>
-  </main>
-
-  <footer>ToolMap · Open directory for useful tools</footer>
-  <script src="app.js"></script>
+<div class="app-shell">
+<header class="topbar">
+<a class="brand" href="#" aria-label="ToolMap home"><span class="brand-mark">✦</span><span><strong>ToolMap</strong><small>EXPLORE TOOLS. SOLVE ANYTHING.</small></span></a>
+<nav class="nav"><a class="active" href="#map">Map</a><a href="#browse">Browse</a><a href="#searchPanel">Search</a><a href="#about">About</a></nav>
+<div class="header-search"><span>⌕</span><input id="topSearch" placeholder="What are you trying to do?" autocomplete="off"></div>
+<div class="tool-count"><strong id="toolCount">0</strong><small>TOOLS</small><i></i></div>
+</header>
+<main>
+<section id="map" class="map-section">
+<div class="hud hud-left"><div class="hud-title">TOOLMAP STATUS <b>● ACTIVE</b></div><div class="hud-row"><span>TOTAL TOOLS</span><strong id="statTools">0</strong></div><div class="hud-row"><span>CATEGORIES</span><strong id="statCats">0</strong></div><div class="hud-row"><span>SEARCH</span><strong id="statSearch">READY</strong></div><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small class="hud-foot">THE RIGHT TOOL<br>FOR EVERY IDEA</small></div>
+<div class="network"><div class="network-glow"></div><canvas id="networkCanvas" aria-hidden="true"></canvas><button class="core" id="coreBtn"><span>ToolMap</span><small>TOOLS CONNECT IDEAS</small></button><div id="nodes"></div></div>
+<div class="hud hud-right"><div class="hud-title">LIVE ACTIVITY <b>●</b></div><div id="activity"><p><i></i> Directory ready</p><p><i></i> Map loaded</p><p><i></i> Search available</p></div></div>
+<div class="hero-copy"><div class="eyebrow">INTERACTIVE TOOL MAP</div><h1>Explore. Connect. Discover.</h1><p>Start with a task, then follow the map to tools that can help.</p><button class="primary" id="browseBtn">EXPLORE TOOLS <span>→</span></button></div>
+</section>
+<section id="browse" class="browse-section"><div class="section-head"><div><div class="eyebrow">DIRECTORY</div><h2>Browse by category</h2></div><div class="section-count"><span id="resultCount">0</span> tools</div></div><div class="browse-grid" id="categoryGrid"></div></section>
+<section id="searchPanel" class="search-panel"><div class="eyebrow">TASK SEARCH</div><h2>Tell ToolMap what you want to do.</h2><div class="big-search"><span>⌕</span><input id="search" placeholder="e.g. find an AI detector, analyze a research paper, search an email…" autocomplete="off"><button id="clear">×</button></div><div class="search-results" id="results"></div></section>
+<section id="about" class="about"><div class="eyebrow">ABOUT TOOLMAP</div><h2>Different tools. A smarter way to find them.</h2><p>Browse categories or describe the task you need help with. ToolMap ranks matching tools using their names, categories, capabilities, inputs, outputs and tags.</p></section>
+</main>
+<footer>TOOLMAP · EXPLORE → LEARN → BUILD → GROW</footer>
+</div>
+<script src="app.js"></script>
 </body>
 </html>
