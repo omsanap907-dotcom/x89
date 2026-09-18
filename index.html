@@ -3,31 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="A public directory that organizes useful tools by what they do and helps you find the right tool for a task.">
-  <title>ToolMap — Find the right tool</title>
+  <meta name="description" content="ToolMap — a visual directory for discovering useful tools by category and task.">
+  <title>ToolMap — Tool Discovery</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="logo">⌕</span><div><strong>ToolMap</strong><small>Discover • Search • Organize</small></div></div>
-    <button id="themeBtn" class="ghost">Light Mode</button>
+    <a class="brand" href="#" aria-label="ToolMap home"><span class="logo">⌘</span><span><strong>ToolMap</strong><small>Tool Discovery Engine</small></span></a>
+    <nav><a href="#directory">Directory</a><a href="#about">About</a><button id="themeBtn" class="ghost">☼</button></nav>
   </header>
+
   <main>
     <section class="hero">
-      <div class="eyebrow">PUBLIC TOOL DIRECTORY</div>
-      <h1>Find the right tool for the job.</h1>
-      <p>Search by what you want to accomplish. Tools are organized from their capabilities, inputs and descriptions instead of relying on a fixed category list.</p>
-      <div class="searchbox"><span>⌕</span><input id="search" autocomplete="off" placeholder="What do you need to do? e.g. edit a video, analyze data, find a PDF"><button id="clear" aria-label="Clear search">×</button></div>
+      <div class="eyebrow">TOOL DIRECTORY</div>
+      <h1>Find the tool you need.</h1>
+      <p>Browse a visual map of tools or search by the task you want to accomplish.</p>
+      <div class="searchbox">
+        <span>⌕</span>
+        <input id="search" autocomplete="off" placeholder="Search a task, category, capability, or tool…">
+        <button id="clear" aria-label="Clear search">×</button>
+      </div>
       <div id="chips" class="chips"></div>
     </section>
-    <div class="layout">
-      <aside class="sidebar"><div class="side-title">Categories</div><div id="categories"></div></aside>
-      <section class="content">
-        <div class="results-head"><div><span id="resultCount">0</span> tools</div><div class="status">Curated directory</div></div>
-        <div id="results" class="results"></div>
-      </section>
-    </div>
+
+    <section id="directory" class="directory">
+      <div class="directory-head">
+        <div><span class="eyebrow">DIRECTORY</span><h2>Explore tools</h2></div>
+        <div class="view-note"><span id="resultCount">0</span> tools</div>
+      </div>
+
+      <div class="map-layout">
+        <aside class="sidebar">
+          <div class="side-title">Categories</div>
+          <div id="categories"></div>
+        </aside>
+        <section class="content">
+          <div id="results" class="tree"></div>
+        </section>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About ToolMap</h2>
+      <p>ToolMap organizes tools by what they do. Category assignments are generated from each tool's description, capabilities, inputs, outputs and tags. Public visitors can browse and search; the tool registry is maintained in the backend.</p>
+    </section>
   </main>
+
+  <footer>ToolMap · Open directory for useful tools</footer>
   <script src="app.js"></script>
 </body>
 </html>
