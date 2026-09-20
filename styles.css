@@ -34,3 +34,6 @@
 .category-page .back{
   background:#fff;
 }
+
+/* Subcategory filters */
+.subcats{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 22px}.subcat{background:#fff;border:2px solid #111;border-radius:7px;padding:7px 10px;box-shadow:3px 3px #111;font:700 11px Arial,sans-serif;cursor:pointer}.subcat small{font-size:9px;opacity:.65}.subcat.selected{background:#111;color:#fff;box-shadow:2px 2px #111}.subcat:active{transform:translate(2px,2px);box-shadow:1px 1px #111}@media(max-width:620px){.subcats{gap:6px}.subcat{font-size:10px;padding:6px 8px}}
