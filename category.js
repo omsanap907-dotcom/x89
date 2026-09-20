@@ -3,21 +3,21 @@ const category=page.dataset.category||"More";
 const folderColor=page.dataset.color||"#ffd21c";
 let tools=[],q="";
 
-const groups={
-"AI Tools":["ai","chat","model","assistant","bot","humanizer","detector"],
-"Writing":["writing","paraphras","grammar","essay","rewriting","text"],
-"Research":["research","academic","paper","literature","citation","evidence"],
-"PDF & Docs":["pdf","document","docs","manuscript"],
-"Image & Design":["image","design","visual","photo","ocr"],
-"Video & Audio":["video","audio","transcription"],
-"Developers":["developer","code","coding","api","programming"],
-"Productivity":["productivity","note","notes","knowledge","organization","workflow"]
+const rules={
+"AI Tools":[/\bai\b/i,/ai /i,/artificial intelligence/i,/assistant/i,/chat/i,/model/i,/humanizer/i,/detector/i],
+"Writing":[/writing/i,/paraphras/i,/grammar/i,/essay/i,/rewriting/i,/text rewriting/i],
+"Research":[/research/i,/academic/i,/paper/i,/literature/i,/citation/i,/evidence/i,/osint/i,/link analysis/i,/domains? & infrastructure/i,/search engines/i,/verification/i,/breach awareness/i],
+"PDF & Docs":[/pdf/i,/document/i,/docs/i,/manuscript/i],
+"Image & Design":[/image/i,/design/i,/visual/i,/photo/i,/ocr/i],
+"Video & Audio":[/video/i,/audio/i,/transcription/i],
+"Developers":[/developer/i,/code/i,/coding/i,/api/i,/programming/i],
+"Productivity":[/productivity/i,/note/i,/knowledge/i,/organization/i,/workflow/i,/summarization/i,/education/i]
 };
 
 const descriptions={
 "AI Tools":"AI assistants, models, detectors and related tools.",
 "Writing":"Writing, rewriting, grammar and text tools.",
-"Research":"Research, academic, citation and evidence tools.",
+"Research":"Research, academic, citation, OSINT and evidence tools.",
 "PDF & Docs":"PDF, document and manuscript tools.",
 "Image & Design":"Image, visual, design, photo and OCR tools.",
 "Video & Audio":"Video, audio and transcription tools.",
@@ -34,7 +34,11 @@ const text=t=>[t.name,t.description,...(t.categories||[]),...(t.tags||[]),...(t.
 
 function bucket(t){
  const h=text(t);
- for(const[g,words] of Object.entries(groups)) if(words.some(w=>h.includes(w))) return g;
+ const cats=(t.categories||[]).join(" | ");
+ // Use the tool's explicit categories first, then its searchable metadata.
+ for(const [group,patterns] of Object.entries(rules)){
+   if(patterns.some(re=>re.test(cats)||re.test(h))) return group;
+ }
  return "More";
 }
 
@@ -53,7 +57,7 @@ function render(){
 document.querySelector("#search").oninput=e=>{q=e.target.value.trim();render()};
 document.querySelector("#clear").onclick=()=>{q="";document.querySelector("#search").value="";render()};
 
-fetch("tools.json?"+Date.now(),{cache:"no-store"})
- .then(r=>{if(!r.ok)throw Error();return r.json()})
+fetch("./tools.json?v=20260920",{cache:"no-store"})
+ .then(r=>{if(!r.ok)throw Error("tools.json failed: "+r.status);return r.json()})
  .then(x=>{tools=x;render()})
- .catch(()=>document.querySelector("#title").textContent="Could not load tools");
+ .catch(e=>{console.error(e);document.querySelector("#title").textContent="Could not load tools";document.querySelector("#count").textContent="";});
