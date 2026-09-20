@@ -40,7 +40,12 @@ document.querySelector("#clear").onclick=()=>{query="";document.querySelector("#
 document.querySelector("#reset").onclick=()=>{category="";query="";document.querySelector("#search").value="";render()};
 document.querySelectorAll(".quick button").forEach(b=>b.onclick=()=>{query=b.dataset.q;document.querySelector("#search").value=query;render();document.querySelector("#tools").scrollIntoView({behavior:"smooth"})});
 async function load(){
+ const catsEl=document.querySelector("#cats");
  try{const r=await fetch("tools.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw Error("tools.json failed");tools=(await r.json()).map(norm)}catch(e){console.error(e);tools=[]}
  renderCats();render();
+ if(!tools.length) catsEl.innerHTML='<div class="loading">No tools loaded. Check tools.json and refresh.</div>';
 }
 load();
+const menuBtn=document.querySelector("#menu"),mobileMenu=document.querySelector("#mobileMenu");
+menuBtn?.addEventListener("click",()=>{const open=mobileMenu.classList.toggle("open");menuBtn.setAttribute("aria-expanded",open)});
+mobileMenu?.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{mobileMenu.classList.remove("open");menuBtn.setAttribute("aria-expanded","false")}));
