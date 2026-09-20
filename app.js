@@ -18,7 +18,9 @@ const text=t=>[t.name,t.description,...t.categories,...t.capabilities,...t.input
 function bucket(t){const h=text(t);for(const [name,words] of groups.slice(0,-1)){if(words.some(w=>h.includes(w)))return name}return "More"}
 function score(t,q){let s=0,h=text(t),n=t.name.toLowerCase();for(const x of q.toLowerCase().split(/\s+/).filter(Boolean)){if(n.includes(x))s+=25;if(h.includes(x))s+=7;if(t.categories.some(c=>c.toLowerCase().includes(x)))s+=12;if(t.capabilities.some(c=>c.toLowerCase().includes(x)))s+=8;if(t.tags.some(c=>c.toLowerCase().includes(x)))s+=8}return s}
 function count(g){return tools.filter(t=>bucket(t)===g).length}
-function renderCats(){const all=["All tools",...groups.map(g=>g[0])];document.querySelector("#cats").innerHTML=all.map((c,i)=>'<a class="cat" style="--c:'+colors[i%colors.length]+'" href="category.html?category='+encodeURIComponent(c)+'"><div class="ico">'+icons[i%icons.length]+'</div><b>'+esc(c)+'</b><span>'+(c==="All tools"?tools.length:count(c))+' tools</span></a>').join("");}function render(){
+function pageFor(c){return {"All tools":"all-tools.html","AI Tools":"ai-tools.html","Writing":"writing.html","Research":"research.html","PDF & Docs":"pdf-docs.html","Image & Design":"image-design.html","Video & Audio":"video-audio.html","Developers":"developers.html","Productivity":"productivity.html","More":"more.html"}[c]||"all-tools.html"}
+function renderCats(){const all=["All tools",...groups.map(g=>g[0])];document.querySelector("#cats").innerHTML=all.map((c,i)=>'<a class="cat" style="--c:'+colors[i%colors.length]+'" href="'+pageFor(c)+'"><div class="ico">'+icons[i%icons.length]+'</div><b>'+esc(c)+'</b><span>'+(c==="All tools"?tools.length:count(c))+' tools</span></a>').join("")}
+function render(){
  let a=tools.filter(t=>!category||bucket(t)===category);
  if(query)a=a.map(t=>({...t,s:score(t,query)})).filter(t=>t.s>0).sort((x,y)=>y.s-x.s);else a.sort((x,y)=>x.name.localeCompare(y.name));
  document.querySelector("#title").textContent=query?"Search results":category||"All tools";
