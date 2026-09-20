@@ -1,79 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#ffffff">
-<meta name="description" content="ToolMap — a simple, searchable directory of useful tools.">
-<title>ToolMap — Find the right tool</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header class="site-header">
-  <a class="brand" href="#"><span class="logo">✦</span><span><b>ToolMap</b><small>Find the right tool</small></span></a>
-  <nav><a href="#tools">Tools</a><a href="#categories">Categories</a><a href="#about">About</a></nav>
-  <button class="mobile-filter" id="mobileFilter" aria-label="Open filters">☰</button>
-</header>
-
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff"><title>ToolMap — Find a tool</title><link rel="stylesheet" href="styles.css"></head><body>
+<header><a class="brand" href="#"><span>✦</span><b>ToolMap</b></a><a href="#categories">Categories</a></header>
 <main>
-<section class="hero">
-  <div class="hero-inner">
-    <span class="eyebrow">TOOL DIRECTORY</span>
-    <h1>Find the right tool.<br><em>Fast.</em></h1>
-    <p>Search by what you need, filter by category, and open the tool directly.</p>
-    <div class="search-box">
-      <span>⌕</span>
-      <input id="search" type="search" placeholder="Search tools, tasks, features…" autocomplete="off">
-      <kbd>/</kbd>
-      <button id="clear" aria-label="Clear search">×</button>
-    </div>
-    <div class="quick-search">
-      <span>Try:</span>
-      <button data-query="AI detector">AI detector</button>
-      <button data-query="research">Research</button>
-      <button data-query="writing">Writing</button>
-      <button data-query="PDF">PDF</button>
-    </div>
-  </div>
-</section>
-
-<section class="directory" id="tools">
-  <aside class="filters" id="filters">
-    <div class="filter-head"><b>Filters</b><button id="closeFilter">×</button></div>
-    <label class="filter-label">Category</label>
-    <div id="categoryList" class="category-list"></div>
-    <label class="filter-label">Sort</label>
-    <select id="sort">
-      <option value="relevance">Relevance</option>
-      <option value="name">Name A–Z</option>
-      <option value="category">Category</option>
-    </select>
-  </aside>
-
-  <section class="results-area">
-    <div class="results-top">
-      <div><span class="eyebrow">DIRECTORY</span><h2 id="resultsTitle">All tools</h2></div>
-      <span class="result-count" id="resultCount">0 tools</span>
-    </div>
-    <div class="active-filters" id="activeFilters"></div>
-    <div class="tool-grid" id="results"></div>
-    <div class="empty" id="empty" hidden>
-      <div>⌕</div><h3>No tools found</h3><p>Try a broader search or choose another category.</p><button id="reset">Clear filters</button>
-    </div>
-  </section>
-</section>
-
-<section class="categories-section" id="categories">
-  <div class="section-title"><span class="eyebrow">BROWSE</span><h2>Explore by category</h2><p>Pick a category instead of searching.</p></div>
-  <div id="categoryCards" class="category-cards"></div>
-</section>
-
-<section class="about" id="about">
-  <span class="eyebrow">ABOUT</span><h2>A simple home for useful tools.</h2>
-  <p>ToolMap helps you discover tools without digging through complicated directories. Search naturally, filter quickly, and open what you need.</p>
-</section>
-</main>
-<footer>ToolMap · Useful tools, easier to find.</footer>
-<script src="app.js"></script>
-</body>
-</html>
+<section class="hero"><div class="hero-inner"><span class="eyebrow">TOOL DIRECTORY</span><h1>What do you need?</h1><p>Find a tool in seconds. Search by task or choose a category.</p>
+<div class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Search e.g. AI detector, PDF, research…" autocomplete="off"><button id="clear">×</button></div>
+<div class="suggestions"><button data-query="AI detector">AI detector</button><button data-query="Research">Research</button><button data-query="Writing">Writing</button><button data-query="PDF">PDF</button></div></div></section>
+<section class="home-cats" id="categories"><div class="section-title"><h2>Choose a category</h2><span id="categoryHint">Browse all tools</span></div><div id="categoryCards" class="category-cards"></div></section>
+<section class="results-section" id="tools"><div class="results-top"><div><span class="eyebrow">RESULTS</span><h2 id="resultsTitle">All tools</h2></div><span id="resultCount">0 tools</span></div><div class="active-filters" id="activeFilters"></div><div class="tool-grid" id="results"></div><div class="empty" id="empty" hidden><h3>No tools found</h3><p>Try another search or category.</p><button id="reset">Show all tools</button></div></section>
+</main><footer>ToolMap · Useful tools, easier to find.</footer><script src="app.js"></script></body></html>
