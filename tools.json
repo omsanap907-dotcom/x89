@@ -788,5 +788,76 @@
     ],
     "source_type": "web",
     "risk": "low"
+  },
+  {
+    "name": "Poe AI",
+    "url": "https://poe.com/",
+    "description": "Multi-model AI platform for chatting with and creating bots powered by models from multiple AI providers.",
+    "categories": [
+      "AI Assistants",
+      "AI Models",
+      "Writing",
+      "Chat"
+    ],
+    "capabilities": [
+      "multi-model chat",
+      "AI bots",
+      "writing",
+      "coding",
+      "research"
+    ],
+    "inputs": [
+      "prompt",
+      "text",
+      "files"
+    ],
+    "outputs": [
+      "AI responses",
+      "generated content",
+      "code"
+    ],
+    "tags": [
+      "AI",
+      "chatbot",
+      "multi-model",
+      "bots",
+      "writing"
+    ],
+    "source_type": "web",
+    "risk": "low"
+  },
+  {
+    "name": "LMArena",
+    "url": "https://lmarena.ai/",
+    "description": "AI model comparison platform for head-to-head response evaluation and model leaderboards.",
+    "categories": [
+      "AI Models",
+      "Model Comparison",
+      "AI Evaluation"
+    ],
+    "capabilities": [
+      "model comparison",
+      "blind evaluation",
+      "leaderboards",
+      "AI benchmarking"
+    ],
+    "inputs": [
+      "prompt",
+      "evaluation choice"
+    ],
+    "outputs": [
+      "model responses",
+      "comparison results",
+      "leaderboard rankings"
+    ],
+    "tags": [
+      "LMArena",
+      "Chatbot Arena",
+      "AI benchmark",
+      "model comparison",
+      "LLM"
+    ],
+    "source_type": "web",
+    "risk": "low"
   }
 ]
