@@ -10,7 +10,7 @@ const groups=[
 ["Productivity",["productivity","note","notes","knowledge","organization","workflow"]],
 ["More",[]]
 ];
-const colors=["#ff4b8b","#7656ef","#20a9e8","#55d94b","#ff9f1c","#ff5d5d","#3b9cff","#b7e92d","#d9d9d9"];
+const colors=["#ff4b8b","#7656ef","#55d94b","#55d94b","#ff9f1c","#ff5d5d","#3b9cff","#b7e92d","#d9d9d9"];
 const icons=["✦","✎","⌕","▤","▧","▶","</>","✓","•••"];
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const norm=t=>({...t,categories:[...new Set(t.categories||["Other"])],capabilities:t.capabilities||[],inputs:t.inputs||[],outputs:t.outputs||[],tags:t.tags||[]});
