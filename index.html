@@ -3,32 +3,77 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050912">
-<meta name="description" content="ToolMap — discover useful tools through an interactive visual map.">
-<title>ToolMap — Explore Tools</title>
+<meta name="theme-color" content="#ffffff">
+<meta name="description" content="ToolMap — a simple, searchable directory of useful tools.">
+<title>ToolMap — Find the right tool</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="app-shell">
-<header class="topbar">
-<a class="brand" href="#" aria-label="ToolMap home"><span class="brand-mark">✦</span><span><strong>ToolMap</strong><small>EXPLORE TOOLS. SOLVE ANYTHING.</small></span></a>
-<nav class="nav"><a class="active" href="#map">Map</a><a href="#browse">Browse</a><a href="#searchPanel">Search</a><a href="#about">About</a></nav>
-<div class="header-search"><span>⌕</span><input id="topSearch" placeholder="What are you trying to do?" autocomplete="off"></div>
-<div class="tool-count"><strong id="toolCount">0</strong><small>TOOLS</small><i></i></div>
+<header class="site-header">
+  <a class="brand" href="#"><span class="logo">✦</span><span><b>ToolMap</b><small>Find the right tool</small></span></a>
+  <nav><a href="#tools">Tools</a><a href="#categories">Categories</a><a href="#about">About</a></nav>
+  <button class="mobile-filter" id="mobileFilter" aria-label="Open filters">☰</button>
 </header>
+
 <main>
-<section id="map" class="map-section">
-<div class="hud hud-left"><div class="hud-title">TOOLMAP STATUS <b>● ACTIVE</b></div><div class="hud-row"><span>TOTAL TOOLS</span><strong id="statTools">0</strong></div><div class="hud-row"><span>CATEGORIES</span><strong id="statCats">0</strong></div><div class="hud-row"><span>SEARCH</span><strong id="statSearch">READY</strong></div><div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><small class="hud-foot">THE RIGHT TOOL<br>FOR EVERY IDEA</small></div>
-<div class="network"><div class="network-glow"></div><canvas id="networkCanvas" aria-hidden="true"></canvas><button class="core" id="coreBtn"><span>ToolMap</span><small>TOOLS CONNECT IDEAS</small></button><div id="nodes"></div></div>
-<div class="hud hud-right"><div class="hud-title">LIVE ACTIVITY <b>●</b></div><div id="activity"><p><i></i> Directory ready</p><p><i></i> Map loaded</p><p><i></i> Search available</p></div></div>
-<div class="hero-copy"><div class="eyebrow">INTERACTIVE TOOL MAP</div><h1>Explore. Connect. Discover.</h1><p>Start with a task, then follow the map to tools that can help.</p><button class="primary" id="browseBtn">EXPLORE TOOLS <span>→</span></button></div>
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">TOOL DIRECTORY</span>
+    <h1>Find the right tool.<br><em>Fast.</em></h1>
+    <p>Search by what you need, filter by category, and open the tool directly.</p>
+    <div class="search-box">
+      <span>⌕</span>
+      <input id="search" type="search" placeholder="Search tools, tasks, features…" autocomplete="off">
+      <kbd>/</kbd>
+      <button id="clear" aria-label="Clear search">×</button>
+    </div>
+    <div class="quick-search">
+      <span>Try:</span>
+      <button data-query="AI detector">AI detector</button>
+      <button data-query="research">Research</button>
+      <button data-query="writing">Writing</button>
+      <button data-query="PDF">PDF</button>
+    </div>
+  </div>
 </section>
-<section id="browse" class="browse-section"><div class="section-head"><div><div class="eyebrow">DIRECTORY</div><h2>Browse by category</h2></div><div class="section-count"><span id="resultCount">0</span> tools</div></div><div class="browse-grid" id="categoryGrid"></div></section>
-<section id="searchPanel" class="search-panel"><div class="eyebrow">TASK SEARCH</div><h2>Tell ToolMap what you want to do.</h2><div class="big-search"><span>⌕</span><input id="search" placeholder="e.g. find an AI detector, analyze a research paper, search an email…" autocomplete="off"><button id="clear">×</button></div><div class="search-results" id="results"></div></section>
-<section id="about" class="about"><div class="eyebrow">ABOUT TOOLMAP</div><h2>Different tools. A smarter way to find them.</h2><p>Browse categories or describe the task you need help with. ToolMap ranks matching tools using their names, categories, capabilities, inputs, outputs and tags.</p></section>
+
+<section class="directory" id="tools">
+  <aside class="filters" id="filters">
+    <div class="filter-head"><b>Filters</b><button id="closeFilter">×</button></div>
+    <label class="filter-label">Category</label>
+    <div id="categoryList" class="category-list"></div>
+    <label class="filter-label">Sort</label>
+    <select id="sort">
+      <option value="relevance">Relevance</option>
+      <option value="name">Name A–Z</option>
+      <option value="category">Category</option>
+    </select>
+  </aside>
+
+  <section class="results-area">
+    <div class="results-top">
+      <div><span class="eyebrow">DIRECTORY</span><h2 id="resultsTitle">All tools</h2></div>
+      <span class="result-count" id="resultCount">0 tools</span>
+    </div>
+    <div class="active-filters" id="activeFilters"></div>
+    <div class="tool-grid" id="results"></div>
+    <div class="empty" id="empty" hidden>
+      <div>⌕</div><h3>No tools found</h3><p>Try a broader search or choose another category.</p><button id="reset">Clear filters</button>
+    </div>
+  </section>
+</section>
+
+<section class="categories-section" id="categories">
+  <div class="section-title"><span class="eyebrow">BROWSE</span><h2>Explore by category</h2><p>Pick a category instead of searching.</p></div>
+  <div id="categoryCards" class="category-cards"></div>
+</section>
+
+<section class="about" id="about">
+  <span class="eyebrow">ABOUT</span><h2>A simple home for useful tools.</h2>
+  <p>ToolMap helps you discover tools without digging through complicated directories. Search naturally, filter quickly, and open what you need.</p>
+</section>
 </main>
-<footer>TOOLMAP · EXPLORE → LEARN → BUILD → GROW</footer>
-</div>
+<footer>ToolMap · Useful tools, easier to find.</footer>
 <script src="app.js"></script>
 </body>
 </html>
