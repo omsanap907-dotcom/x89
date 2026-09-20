@@ -12,7 +12,7 @@ const groups=[
 ];
 const colors=["#ff4b8b","#7656ef","#20a9e8","#55d94b","#ff9f1c","#ff5d5d","#3b9cff","#b7e92d","#d9d9d9"];
 const icons=["✦","✎","⌕","▤","▧","▶","</>","✓","•••"];
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",""":"&quot;","'":"&#39;"}[m]));
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const norm=t=>({...t,categories:[...new Set(t.categories||["Other"])],capabilities:t.capabilities||[],inputs:t.inputs||[],outputs:t.outputs||[],tags:t.tags||[]});
 const text=t=>[t.name,t.description,...t.categories,...t.capabilities,...t.inputs,...t.outputs,...t.tags].join(" ").toLowerCase();
 function bucket(t){const h=text(t);for(const [name,words] of groups.slice(0,-1)){if(words.some(w=>h.includes(w)))return name}return "More"}
@@ -21,7 +21,7 @@ function count(g){return tools.filter(t=>bucket(t)===g).length}
 function renderCats(){
  const all=["All tools",...groups.map(g=>g[0])];
  document.querySelector("#cats").innerHTML=all.map((c,i)=>'<button class="cat" style="--c:'+colors[i%colors.length]+'" data-c="'+(c==="All tools"?"":esc(c))+'"><div class="ico">'+icons[i%icons.length]+'</div><b>'+esc(c)+'</b><span>'+(c==="All tools"?tools.length:count(c))+' tools</span></button>').join("");
- document.querySelectorAll(".cat").forEach(b=>b.onclick=()=>{category=b.dataset.c;render();document.querySelector("#tools").scrollIntoView({behavior:"smooth"})})
+ document.querySelectorAll(".cat").forEach(b=>b.onclick=()=>{category=b.dataset.c;render();document.querySelector("#tools").scrollIntoView({behavior:"smooth"})});
 }
 function render(){
  let a=tools.filter(t=>!category||bucket(t)===category);
@@ -41,6 +41,6 @@ document.querySelector("#reset").onclick=()=>{category="";query="";document.quer
 document.querySelectorAll(".quick button").forEach(b=>b.onclick=()=>{query=b.dataset.q;document.querySelector("#search").value=query;render();document.querySelector("#tools").scrollIntoView({behavior:"smooth"})});
 async function load(){
  try{const r=await fetch("tools.json?"+Date.now(),{cache:"no-store"});if(!r.ok)throw Error("tools.json failed");tools=(await r.json()).map(norm)}catch(e){console.error(e);tools=[]}
- renderCats();render()
+ renderCats();render();
 }
 load();
